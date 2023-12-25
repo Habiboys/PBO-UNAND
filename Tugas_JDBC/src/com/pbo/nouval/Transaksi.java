@@ -53,18 +53,37 @@ public class Transaksi extends Barang implements TotalBayar {
         try (Connection connection = DatabaseUtil.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM transaksi")) {
-
+    
             while (resultSet.next()) {
+                int idTransaksi = resultSet.getInt("id");
                 String namaPelanggan = resultSet.getString("nama_pelanggan");
-
+                String nomorHP = resultSet.getString("nomor_hp");
+                String alamat = resultSet.getString("alamat");
+                String kodeBarang = resultSet.getString("kode_barang");
+                String namaBarang = resultSet.getString("nama_barang");
+                double hargaBarang = resultSet.getDouble("harga_barang");
+                int jumlahBeli = resultSet.getInt("jumlah_beli");
+                String tanggalTransaksi = resultSet.getString("tanggal_transaksi");
+                String waktuTransaksi = resultSet.getString("waktu_transaksi");
+    
+                System.out.println("ID Transaksi  : " + idTransaksi);
                 System.out.println("Nama Pelanggan: " + namaPelanggan);
-                // Tampilkan data lainnya ...
+                System.out.println("Nomor HP      : " + nomorHP);
+                System.out.println("Alamat        : " + alamat);
+                System.out.println("Kode Barang   : " + kodeBarang);
+                System.out.println("Nama Barang   : " + namaBarang);
+                System.out.println("Harga Barang  : " + hargaBarang);
+                System.out.println("Jumlah Beli   : " + jumlahBeli);
+                System.out.println("Tanggal Transaksi: " + tanggalTransaksi);
+                System.out.println("Waktu Transaksi  : " + waktuTransaksi);
+                System.out.println("------------------------");
             }
-
+    
         } catch (SQLException e) {
             System.out.println("Terjadi kesalahan: " + e.getMessage());
         }
     }
+    
 
     public void perbaruiTransaksiDiDatabase(int transaksiId, double newHargaBarang) {
         try (Connection connection = DatabaseUtil.getConnection();
